@@ -130,16 +130,16 @@ const QuestionView = () => {
         <br />
         <div className="qz-list">
 
-          <p>Question ni no- {qzNo + 1}</p>
+          <p className="text-sm text-gray-500">Question No <span> {qzNo + 1}</span></p>
 
           {
             <div>
-              <h3 className="text-xl text-black">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
-              <ul ref={qz_opt} className="grid grid-cols-2" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
-                <li id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
-                <li id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
-                <li id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>
-                <li id="d">D -{data.story.content.qz_blocks[`${qzNo}`].d}</li>
+              <h3 className="text-2xl text-black my-3">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
+              <ul ref={qz_opt} className="grid grid-cols-2 gap-4" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
+                <li className="border-solid border border-gray-300 rounded-sm p-5 hover:bg-slate-300" id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
+                <li className="border-solid border border-gray-300 rounded-sm p-5 hover:bg-slate-300" id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
+                <li className="border-solid border border-gray-300 rounded-sm p-5 hover:bg-slate-300" id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>
+                <li className="border-solid border border-gray-300 rounded-sm p-5 hover:bg-slate-300" id="d">D -{data.story.content.qz_blocks[`${qzNo}`].d}</li>
               </ul>
 
             </div>
