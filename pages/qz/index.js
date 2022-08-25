@@ -9,15 +9,14 @@ const Qz = (props) => {
       <h3>QZ Select</h3>
       {
         props.data &&
-        <div>
+        <div className="flex gap-6">
           {
             props.data.stories.map((group, i) => (
-              <div key={i}>
-
+              <div className="bg-amber-500 text-white p-6 rounded-md"
+                key={i}>
                 <Link href={'/qz/' + group.slug}>
                   <a>
                     <span>{group.name}</span>
-                    <span>{group.slug}</span>
                   </a>
                 </Link>
               </div>

@@ -123,16 +123,19 @@ const QuestionView = () => {
     <div>{
       data &&
       <div>
-        <h5>Question View details of <b style={{ 'fontSize': '30px' }}> {data.story.name}</b></h5>
+        <div className="text-center my-3">
+          <h5 className="text-3xl font-bold ">{data.story.name}</h5>
+          <p className="text-sm text-slate-500">Please select the correct answer</p>
+        </div>
         <br />
         <div className="qz-list">
 
-          <p>qz no- {qzNo + 1}</p>
+          <p>Question ni no- {qzNo + 1}</p>
 
           {
             <div>
-              <h3>{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
-              <ul ref={qz_opt} className="qz-answers" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
+              <h3 className="text-xl text-black">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
+              <ul ref={qz_opt} className="grid grid-cols-2" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
                 <li id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
                 <li id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
                 <li id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>

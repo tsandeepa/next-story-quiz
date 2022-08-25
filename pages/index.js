@@ -18,7 +18,7 @@ export default function Home(props) {
           {props.story ? props.story.name : 'My Site'}
         </h1>
       </header>
-
+      <h2 className="text-3xl">Test</h2>
       <main>
 
       </main>
