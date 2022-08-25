@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #8f8f8f;
 }
 
 a {
@@ -19,8 +20,24 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.qz-answers {
+  display: grid;
+  list-style: none;
+  grid-template-columns: 1fr 1fr;
+}
+
+.active {
+  background: #cfc;
 }
