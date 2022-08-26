@@ -1,3 +1,87 @@
+body {
+  background: #2f3445;
+}
+
+.active {
+  background: #3897ff !important;
+}
+
+@keyframes animateCorrect {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.03);
+
+  }
+}
+
+.correct {
+  background: #1cd8d3 !important;
+  animation: animateCorrect 1s linear alternate-reverse infinite;
+}
+
+.main-view {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.answer-won {}
+
+
+.answer-won:after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  background: linear-gradient(45deg, #189f67, #2b92ff, #00ff00, #ffff00, #2bff00, #009bfb, #38e5f8, #00ff00, #ffff00, #00ff84);
+  background-size: 450%;
+  z-index: -1;
+  animation: rgb-shadow 24s alternate-reverse infinite;
+  width: 100%;
+  height: 100%;
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+  opacity: 0.9;
+}
+
+
+.answer-defeated {}
+
+.answer-defeated:after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  background: linear-gradient(45deg, #ff0000, #ff7700, #d100dc, #ff0404, #ba1b40, #cf330c, #9e0386, #c11d8a, #ff006f, #ff5500);
+  background-size: 450%;
+  z-index: -1;
+  animation: rgb-shadow 24s alternate-reverse infinite;
+  width: 100%;
+  height: 100%;
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+  opacity: 0.9;
+}
+
+@keyframes rgb-shadow {
+  0% {
+    background-position: 0 0;
+  }
+
+  50.01% {
+    background-position: 250% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
