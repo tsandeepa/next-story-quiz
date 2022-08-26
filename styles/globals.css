@@ -71,14 +71,18 @@ body {
 @keyframes rgb-shadow {
   0% {
     background-position: 0 0;
+    opacity: 0.5;
   }
 
   50.01% {
     background-position: 250% 0;
+    opacity: 1;
+
   }
 
   100% {
     background-position: 0 0;
+    opacity: 0.5;
   }
 }
 
