@@ -6,6 +6,10 @@ body {
   background: #3897ff !important;
 }
 
+.active-wrong {
+  background: #ff386a !important;
+}
+
 @keyframes animateCorrect {
   0% {
     transform: scale(1);
