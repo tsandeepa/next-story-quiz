@@ -6,6 +6,10 @@ body {
   background: #3897ff !important;
 }
 
+.active-wrong {
+  background: #ff386a !important;
+}
+
 @keyframes animateCorrect {
   0% {
     transform: scale(1);
@@ -25,12 +29,31 @@ body {
 .main-view {
   position: fixed;
   left: 0;
-  bottom: 0;
+  top: 0;
   width: 100%;
-  height: 30%;
-  z-index: -1;
-  opacity: 0.5;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.4;
+  pointer-events: none;
 }
+
+.counter {
+  text-align: center;
+}
+
+.counter p {
+  text-align: center;
+}
+
+.counter h3 {
+  font-size: 100px;
+  font-weight: 600;
+}
+
+/* 
+.qz-li {
+  opacity: 0;
+} */
 
 .answer-won {}
 
@@ -65,7 +88,24 @@ body {
   height: 100%;
   filter: blur(100px);
   -webkit-filter: blur(100px);
-  opacity: 0.9;
+  opacity:
+
+    0.9;
+}
+
+.qz-container::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* background: #ccf; */
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background-image: url('../public/main-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @keyframes rgb-shadow {
