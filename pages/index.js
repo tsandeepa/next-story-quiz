@@ -21,7 +21,7 @@ export default function Home(props) {
 
       <header>
         <h1 className="text-center text-2xl mt-10 mb-6">
-          Welcome to the Quiz App
+          Quiz
         </h1>
       </header>
       <main className="text-center">

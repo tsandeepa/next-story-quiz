@@ -1,20 +1,17 @@
 import { getStoryblokApi } from "@storyblok/react";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const QuestionView = () => {
 
+
+
   const router = useRouter();
-
   const storyblokApi = getStoryblokApi();
-
   const [data, setdata] = useState();
   let [qzNo, setqzNo] = useState(0);
   const [btStatus, setbtStatus] = useState(false);
-
   const [selectedAnswer, setselectedAnswer] = useState(false);
-
 
 
   // load the draft version
@@ -36,6 +33,7 @@ const QuestionView = () => {
       })
 
   }, []);
+
 
 
 
@@ -62,24 +60,26 @@ const QuestionView = () => {
   const audio_letsplay = useRef(null);
   const audio_thinking = useRef(null);
 
+
+
+  const playLetsPlay = () => {
+    if (audio_letsplay.current) {
+      audio_letsplay.current.play();
+    }
+  };
+
+  const playThinking = () => {
+    if (audio_thinking.current) {
+      audio_thinking.current.loop = true;
+      audio_thinking.current.play();
+    }
+  };
+
   useEffect(() => {
 
-    const playLetsPlay = () => {
-      if (audio_letsplay.current) {
-        audio_letsplay.current.play();
-      }
-    };
-
-    const playThinking = () => {
-      if (audio_thinking.current) {
-        audio_thinking.current.loop = true;
-        audio_thinking.current.play();
-      }
-    };
-
-    setTimeout(() => {
-      playLetsPlay();
-    }, 500);
+    playLetsPlay();
+    // setTimeout(() => {
+    // }, 700);
 
     setTimeout(() => {
       playThinking()
@@ -101,7 +101,7 @@ const QuestionView = () => {
       audioRef.current.play();
       setTimeout(() => {
         const lockedAudio = audio_locked.current;
-        lockedAudio.loop = true; // Set the loop attribute to true
+        lockedAudio.loop = true;
         lockedAudio.play();
       }, 3000);
     }
@@ -206,7 +206,7 @@ const QuestionView = () => {
   }
 
   return (
-    <div>{
+    <div className="qz-container">{
       data &&
       <div>
         <div className="text-center my-3">
@@ -222,11 +222,11 @@ const QuestionView = () => {
             <div>
               <h3 className="text-3xl text-white my-3">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
               <div onClick={playAudio}>
-                <ul ref={qz_opt} className="grid grid-cols-2 gap-4 mt-8" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
-                  <li className="bg-slate-500 rounded-sm p-5 hover:bg-opacity-80 cursor-pointer" id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
-                  <li className="bg-slate-500 rounded-sm p-5 hover:bg-opacity-80 cursor-pointer" id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
-                  <li className="bg-slate-500 rounded-sm p-5 hover:bg-opacity-80 cursor-pointer" id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>
-                  <li className="bg-slate-500 rounded-sm p-5 hover:bg-opacity-80 cursor-pointer" id="d">D -{data.story.content.qz_blocks[`${qzNo}`].d}</li>
+                <ul ref={qz_opt} className="qz-ul grid grid-cols-2 gap-9 mt-8 text-3xl" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="d">D -{data.story.content.qz_blocks[`${qzNo}`].d}</li>
                 </ul>
               </div>
 
