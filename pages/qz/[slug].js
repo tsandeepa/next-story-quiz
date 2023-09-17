@@ -1,6 +1,7 @@
 import { getStoryblokApi } from "@storyblok/react";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import ImgPopup from "../../components/imgPopup";
 
 const QuestionView = () => {
 
@@ -12,7 +13,7 @@ const QuestionView = () => {
   let [qzNo, setqzNo] = useState(0);
   const [btStatus, setbtStatus] = useState(false);
   const [selectedAnswer, setselectedAnswer] = useState(false);
-
+  const [popView, setPopView] = useState(false);
 
   // load the draft version
   let sbParams = {
@@ -83,7 +84,7 @@ const QuestionView = () => {
 
     setTimeout(() => {
       playThinking()
-    }, 6000);
+    }, 2000);
 
 
     return () => {
@@ -209,9 +210,9 @@ const QuestionView = () => {
     <div className="qz-container">{
       data &&
       <div>
-        <div className="text-center my-3">
-          <h5 className="text-3xl font-bold ">{data.story.name}</h5>
-          <p className="text-sm text-slate-500">Please select the correct answer</p>
+        <div className=" flex items-center justify-center my-3">
+          <img className="w-16" src={data.story.content.grp_img} alt="" />
+          <h5 className="text-2xl font-bold ">{data.story.name}</h5>
         </div>
         <br />
         <div className="qz-list">
@@ -220,13 +221,18 @@ const QuestionView = () => {
 
           {
             <div>
-              <h3 className="text-3xl text-white my-3">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
+              <div className="bg-slate-900 text-center py-8 px-5">
+                <h3 className="text-5xl text-white my-3">{data.story.content.qz_blocks[`${qzNo}`].question_title}</h3>
+              </div>
+              <div className="mt-6  bg-black hover:cursor-pointer" onClick={() => setPopView(true)}>
+                <img className="max-h-60 mx-auto" src={data.story.content.qz_blocks[`${qzNo}`].question_img[0]?.filename} alt="" />
+              </div>
               <div onClick={playAudio}>
-                <ul ref={qz_opt} className="qz-ul grid grid-cols-2 gap-9 mt-8 text-3xl" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
-                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="a">A - {data.story.content.qz_blocks[`${qzNo}`].a}</li>
-                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="b">B -{data.story.content.qz_blocks[`${qzNo}`].b}</li>
-                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="c">C -{data.story.content.qz_blocks[`${qzNo}`].c}</li>
-                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="d">D -{data.story.content.qz_blocks[`${qzNo}`].d}</li>
+                <ul ref={qz_opt} className="qz-ul grid grid-cols-2 gap-9 mt-8 text-4xl" onClick={(e) => selectAnswer(e, data.story.content.qz_blocks[`${qzNo}`].answer)}>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="a"> <span className="text-slate-300">A </span>- {data.story.content.qz_blocks[`${qzNo}`].a}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="b"> <span className="text-slate-300">B </span>-{data.story.content.qz_blocks[`${qzNo}`].b}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="c"> <span className="text-slate-300">C </span>-{data.story.content.qz_blocks[`${qzNo}`].c}</li>
+                  <li className="qz-li bg-slate-900 border-white border-2 rounded-sm p-5 hover:scale-105 hover:transition ease-in-out duration-300 cursor-pointer" id="d"> <span className="text-slate-300">D </span>-{data.story.content.qz_blocks[`${qzNo}`].d}</li>
                 </ul>
               </div>
 
@@ -236,9 +242,10 @@ const QuestionView = () => {
               <audio ref={audio_correct} src='/audio/wrong.mp3' />
               <audio ref={audio_letsplay} src='/audio/lets_play.mp3' />
               <audio ref={audio_thinking} src='/audio/Thinkinng.mp3' />
-              <div className="mt-6  bg-black">
-                <img className="max-h-60 mx-auto" src={data.story.content.qz_blocks[`${qzNo}`].question_img[0]?.filename} alt="" />
-              </div>
+
+              {
+                popView && <ImgPopup qzOptions={data.story.content.qz_blocks[`${qzNo}`]} imgPath={data.story.content.qz_blocks[`${qzNo}`].question_img[0]?.filename} setPopView={setPopView} />
+              }
             </div>
           }
           <div className="my-10 px-10 flex items-center justify-between fixed bottom-0 left-0 w-full">
